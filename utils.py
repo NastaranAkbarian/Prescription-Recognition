@@ -1,5 +1,7 @@
 import cv2
 import pandas as pd
+from rapidfuzz import fuzz
+
 
 def preprocess_image(image_path):
 
@@ -21,8 +23,8 @@ def clean_ocr_text(text):
 
     return text.strip().lower().replace('\n', ' ')
 
-def compare_with_labels(ocr_output, true_label):
-
-    return true_label.lower() in ocr_output.lower()
-
+def compare_with_labels(ocr_text, label_text):
+    # partial_ratio
+    similarity = fuzz.partial_ratio(ocr_text, label_text)
+    return similarity > 85
 #change
