@@ -24,3 +24,5 @@ def clean_ocr_text(text):
 def compare_with_labels(ocr_output, true_label):
 
     return true_label.lower() in ocr_output.lower()
+
+#change
