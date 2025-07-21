@@ -1,3 +1,8 @@
+Prescription-Recognition
+Extract text from handwritten prescription images using Python and deep learning.
+
+...................
+
  Project Phases
 
   Phase 1 – Model Comparison on Small Dataset
