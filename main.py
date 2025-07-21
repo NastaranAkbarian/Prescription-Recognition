@@ -1,14 +1,31 @@
-from utils import preprocess_image, load_labels, clean_ocr_text, compare_with_labels
-
-image = preprocess_image('data/small_test/rx_01.jpg')
-
-labels = load_labels('labels.xlsx')
+from utils import load_dataset, read_image
 
 
-ocr_output = "استامینوفن 500mg"
+def main():
+    base_path = r"C:\Users\ASUS\PycharmProjects\Prescription-Recognition\Doctor’s Handwritten Prescription BD dataset\training"
 
-cleaned_text = clean_ocr_text(ocr_output)
+    train_df = load_dataset(base_path, labels_filename="training_labels.csv")
 
-is_match = compare_with_labels(cleaned_text, labels['rx_01.jpg'])
+    print(f"\n🔢 تعداد نمونه‌ها: {len(train_df)}")
+    print(train_df.head())
 
-print(f"Match with label: {is_match}")
+    for index, row in train_df.iterrows():
+        img_path = row['image_path']
+        label = row['label']
+
+        print(f"\n📄 Label: {label}")
+        print(f"🖼 Image Path: {img_path}")
+
+        img = read_image(img_path)
+
+        if img is None:
+            print("⚠️ تصویر بارگذاری نشد.")
+        else:
+            print(f"✅ تصویر بارگذاری شد - ابعاد: {img.shape}")
+
+        if index >= 4:
+            break  # فقط 5 نمونه اول را نمایش بده
+
+
+if __name__ == "__main__":
+    main()

@@ -1,28 +1,35 @@
-import cv2
+import os
 import pandas as pd
+import cv2
 
-def preprocess_image(image_path):
+def load_dataset(base_path, labels_filename="training_labels.csv", images_folder="training_words"):
+    """
+    بارگذاری دیتاست از مسیر مشخص شده
+    - خواندن فایل لیبل‌ها (CSV یا Excel)
+    - ایجاد مسیر کامل برای عکس‌ها
+    """
+    labels_path = os.path.join(base_path, labels_filename)
+    images_path = os.path.join(base_path, images_folder)
+
+    print("📄 در حال بارگذاری فایل لیبل‌ها:", labels_path)
+
+    if labels_filename.endswith(".csv"):
+        df = pd.read_csv(labels_path)
+    else:
+        df = pd.read_excel(labels_path)
+
+    df['image_path'] = df.iloc[:, 0].apply(lambda name: os.path.join(images_path, str(name)))
+    df['label'] = df.iloc[:, 1]
+
+    return df
+
+def read_image(image_path):
+    """
+    خواندن تصویر از مسیر داده‌شده با استفاده از OpenCV
+    """
+    if not os.path.exists(image_path):
+        print(f"❌ تصویر پیدا نشد: {image_path}")
+        return None
 
     img = cv2.imread(image_path)
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    blur = cv2.GaussianBlur(gray, (5, 5), 0)
-    thresh = cv2.adaptiveThreshold(blur, 255,
-                                   cv2.ADAPTIVE_THRESH_GAUSSIAN_C,
-                                   cv2.THRESH_BINARY, 11, 2)
-    return thresh
-
-def load_labels(excel_path):
-
-    df = pd.read_excel(excel_path)
-    labels = dict(zip(df['image_name'], df['drugs']))
-    return labels
-
-def clean_ocr_text(text):
-
-    return text.strip().lower().replace('\n', ' ')
-
-def compare_with_labels(ocr_output, true_label):
-
-    return true_label.lower() in ocr_output.lower()
-
-#change
+    return img
