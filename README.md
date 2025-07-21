@@ -1,21 +1,70 @@
-Prescription-Recognition
+# 💊 Prescription Recognition
+
 Extract text from handwritten prescription images using Python and deep learning.
+Designed for researchers, developers, and medical professionals to automate and improve prescription digitization with high accuracy.
 
-...................
+## ✨ Features
 
-Project Phases
+- 🧠 Evaluate multiple OCR models (EasyOCR, PaddleOCR, TROCR, Tesseract) for handwritten Persian & English text.
+- 🖼️ Image preprocessing to enhance OCR accuracy.
+- 🧹 Text cleaning tailored to medical prescription language.
+- 📊 Comprehensive evaluation metrics: precision, recall, edit distance, match rate.
+- 📁 Batch processing of large datasets with ground truth labels.
+- 📈 Phase-wise project development for systematic improvements.
 
-Phase 1 – Model Comparison on Small Dataset
-We test multiple OCR models (EasyOCR, PaddleOCR, TROCR ) on a small set of 5–10 prescription images to evaluate their effectiveness in recognizing handwritten text in Persian and English.
+## 🛠 Usage & Configuration
 
-Phase 2 – Full Dataset Evaluation
-we run them on the full dataset and evaluate the output against labeled ground truth.
+- **Input Images:** Put prescription images in `data/` folder or configure paths accordingly.
+- **Labels:** Ground truth labels stored in `labels.xlsx`.
+- **Modify OCR & Preprocessing:** Edit `utils.py` to customize OCR engines, preprocessing, or cleaning steps.
 
-Phase 3 – Final Evaluation & Reporting
-We calculate accuracy metrics and compare performance (precision, recall, match rate, edit distance) to decide which model works best.
+## 📂 Project Structure
 
-## Fork improvements by @power0matin
+| File/Directory      | Description                            |
+| ------------------- | -------------------------------------- |
+| `main.py`           | Run OCR on single images               |
+| `batch_evaluate.py` | Evaluate OCR models on entire dataset  |
+| `utils.py`          | Preprocessing, OCR wrappers, utilities |
+| `labels.xlsx`       | Ground truth labels for evaluation     |
+| `data/`             | Sample prescription images             |
+| `README.md`         | Project documentation                  |
+| `requirements.txt`  | Python dependencies                    |
+| `report.md`         | Evaluation results and summary         |
 
-- Added Tesseract OCR support for Persian and English (`pytesseract`)
-- Added fuzzy text comparison with RapidFuzz (`partial_ratio` with threshold 85%)
-- Batch evaluation script (`batch_evaluate.py`) to process multiple images and save results to `results.csv`
+## 📈 Project Phases & Roadmap
+
+| Phase   | Description                                             | Status         |
+| ------- | ------------------------------------------------------- | -------------- |
+| Phase 1 | Compare OCR models on small dataset (5-10 images)       | ✅ Completed   |
+| Phase 2 | Full dataset evaluation with detailed metrics           | 🔄 In Progress |
+| Phase 3 | Final evaluation, model selection, and reporting        | 🔜 Planned     |
+| Phase 4 | Modularize code and improve scalability                 | 🔜 Planned     |
+| Phase 5 | Develop user-friendly GUI/web interface                 | 🔜 Planned     |
+| Phase 6 | Add multi-language support beyond Persian and English   | 🔜 Planned     |
+| Phase 7 | Deploy cloud API for real-time prescription recognition | 🔜 Planned     |
+
+## 🔮 Future Enhancements
+
+- Fine-tune OCR models specifically for Persian handwriting.
+- Add data augmentation and semi-supervised labeling techniques.
+- Integrate NLP-based semantic verification for prescription correctness.
+- Create a web dashboard to visualize results and manage datasets.
+- Enable API access for integration with hospital or pharmacy systems.
+
+## 👩‍💻 Developers & Maintainers
+
+Original project by [Nastaran Akbarian](https://github.com/NastaranAkbarian).
+Currently maintained and extended by the open source community.
+
+Contributions, issues, and feature requests are very welcome! Please submit pull requests or open issues on GitHub.
+
+## 📜 License
+
+This project is licensed under the **MIT License** — free for personal and commercial use with attribution.
+
+## 📞 Contact & Support
+
+For questions or collaboration, please open an issue on GitHub or contact the maintainer via GitHub profile.
+
+> ⭐ If you find this project useful, please give it a star and share with your peers!
+> Thank you for supporting open-source AI-powered healthcare tools!
